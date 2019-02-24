@@ -49,4 +49,4 @@ release:
     name: AriaNg-go
   draft: true
   prerelease: true
-  name_template: "{{.ProjectName}}-v{{.Version}}-{{.ShortCommit}}"
+  name_template: "{{.ProjectName}}-v{{.Version}}-{{.ShortCommit}}-{{.Date}}"
