@@ -1,3 +1,9 @@
+<div align="center">
+  <a href="https://travis-ci.org/cxjava/AriaNg-go">
+    <img src="https://travis-ci.org/cxjava/AriaNg-go.svg?branch=master" alt="Build Status">
+  </a>
+</div>
+
 # AriaNg-go
 AriaNg in go http server
 
