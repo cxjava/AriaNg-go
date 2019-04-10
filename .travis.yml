@@ -27,7 +27,7 @@ before_install:
   - chmod +x upx.sh
   - ls -al
   - chmod +x ./upx.sh
-  - ls -al
+  - ls -al "${TRAVIS_BUILD_DIR}/upx1/${UPXVER}/"
   - go get -u -v github.com/UnnoTed/fileb0x
   - go install github.com/UnnoTed/fileb0x
 
