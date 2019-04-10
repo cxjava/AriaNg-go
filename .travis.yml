@@ -13,15 +13,15 @@ before_install:
   - wget https://github.com/goreleaser/goreleaser/releases/download/v${GORELEASER_VERSION}/goreleaser_amd64.deb
   - sudo dpkg -i goreleaser_amd64.deb
   - |
-    if [[ ! -f "upx" ]]
+    if [[ ! -f "./upx" ]]
     then
       echo "Installing upx .."
       curl -OL "https://github.com/upx/upx/releases/download/v${UPXVER}/upx-${UPXVER}-amd64_linux.tar.xz"
       tar xvf "upx-${UPXVER}-amd64_linux.tar.xz"
       cp "upx-${UPXVER}-amd64_linux/upx" "./"
     fi
-  - "${TRAVIS_BUILD_DIR}/upx" --version | grep -E '^upx'
-  - "${TRAVIS_BUILD_DIR}/upx" --version
+  - upx --version | grep -E '^upx'
+  - upx --version
   - chmod +x upx.sh
   - ls -al
   - go get -u -v github.com/UnnoTed/fileb0x
