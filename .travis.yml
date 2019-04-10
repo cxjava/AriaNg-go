@@ -21,8 +21,7 @@ before_install:
       cp "upx-${UPXVER}-amd64_linux/upx" "./"
     fi
   - ls -al
-  - upx --version | grep -E '^upx'
-  - upx --version
+  - ./upx --version
   - chmod +x upx.sh
   - ls -al
   - go get -u -v github.com/UnnoTed/fileb0x
