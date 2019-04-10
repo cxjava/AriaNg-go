@@ -20,6 +20,7 @@ before_install:
       tar xvf "upx-${UPXVER}-amd64_linux.tar.xz"
       cp "upx-${UPXVER}-amd64_linux/upx" "./"
     fi
+  - ls -al
   - upx --version | grep -E '^upx'
   - upx --version
   - chmod +x upx.sh
