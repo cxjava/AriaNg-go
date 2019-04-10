@@ -18,11 +18,12 @@ before_install:
       echo "Installing upx .."
       curl -OL "https://github.com/upx/upx/releases/download/v${UPXVER}/upx-${UPXVER}-amd64_linux.tar.xz"
       tar xvf "upx-${UPXVER}-amd64_linux.tar.xz"
-      mkdir -p upx
-      mv "upx-${UPXVER}-amd64_linux" "upx/${UPXVER}"
+      mkdir -p upx1
+      mv "upx-${UPXVER}-amd64_linux" "upx1/${UPXVER}"
     fi
-  - export PATH="${TRAVIS_BUILD_DIR}/upx/${UPXVER}/:${PATH}"
+  - export PATH="${TRAVIS_BUILD_DIR}/upx1/${UPXVER}/:${PATH}"
   - upx --version | grep -E '^upx'
+  - upx --version
   - chmod +x upx.sh
   - ls -al
   - chmod +x ./upx.sh
