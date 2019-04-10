@@ -24,6 +24,9 @@ before_install:
   - export PATH="${TRAVIS_BUILD_DIR}/upx/${UPXVER}/:${PATH}"
   - upx --version | grep -E '^upx'
   - chmod +x upx.sh
+  - ls -al
+  - chmod +x ./upx.sh
+  - ls -al
   - go get -u -v github.com/UnnoTed/fileb0x
   - go install github.com/UnnoTed/fileb0x
 
