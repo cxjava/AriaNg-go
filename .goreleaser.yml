@@ -48,5 +48,5 @@ release:
     owner: cxjava
     name: AriaNg-go
   draft: true
-  prerelease: true
+  prerelease: auto
   name_template: "{{.ProjectName}}-v{{.Version}}-{{.ShortCommit}}-{{.Date}}"
