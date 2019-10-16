@@ -6,7 +6,7 @@ go:
 env:
   global:
     - GORELEASER_VERSION=0.104.3
-    - ARIANG_VERSION="1.1.1"
+    - ARIANG_VERSION="1.1.4"
     - UPXVER="3.94"
 before_install:
   - wget https://github.com/mayswind/AriaNg/releases/download/${ARIANG_VERSION}/AriaNg-${ARIANG_VERSION}.zip && unzip -q AriaNg-${ARIANG_VERSION}.zip -d AriaNg
