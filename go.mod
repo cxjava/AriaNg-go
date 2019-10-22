@@ -3,7 +3,6 @@ module github.com/cxjava/AriaNg-go
 go 1.13
 
 require (
-	github.com/UnnoTed/fileb0x v1.1.4 // indirect
 	github.com/mitchellh/go-homedir v1.1.0
 	github.com/spf13/cobra v0.0.5
 	github.com/spf13/viper v1.4.0
