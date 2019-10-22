@@ -1,17 +1,18 @@
 language: go
-sudo: true
+
 go:
-- 1.12.x
+- 1.13.x
 
 env:
   global:
-    - GORELEASER_VERSION=0.104.3
+    - GO111MODULE=on
+    - GORELEASER_VERSION=0.120.2
     - ARIANG_VERSION="1.1.4"
     - UPXVER="3.94"
-before_install:
+
+install:
+  - curl -sfL https://install.goreleaser.com/github.com/goreleaser/goreleaser.sh | sh -s -- -b $(go env GOPATH)/bin v${GORELEASER_VERSION}
   - wget https://github.com/mayswind/AriaNg/releases/download/${ARIANG_VERSION}/AriaNg-${ARIANG_VERSION}.zip && unzip -q AriaNg-${ARIANG_VERSION}.zip -d AriaNg
-  - wget https://github.com/goreleaser/goreleaser/releases/download/v${GORELEASER_VERSION}/goreleaser_amd64.deb
-  - sudo dpkg -i goreleaser_amd64.deb
   - |
     if [[ ! -f "./upx" ]]
     then
@@ -27,9 +28,24 @@ before_install:
   - go get -u -v github.com/UnnoTed/fileb0x
   - go install github.com/UnnoTed/fileb0x
 
-script:
-  - goreleaser --skip-validate --skip-sign --debug
+deploy:
+  - provider: script
+    skip_cleanup: true
+    script: |
+      export GO_VERSION="$TRAVIS_GO_VERSION"
+      export BUILT_BY="$(whoami)@$(hostname)"
+      export GIT_BRANCH="$TRAVIS_BRANCH"
+      goreleaser --skip-validate --skip-sign --debug
+    on:
+      tags: true
 
-branches:
-  only:
-    - master
+  - provider: script
+    skip_cleanup: true
+    script: |
+      export GO_VERSION="$TRAVIS_GO_VERSION"
+      export BUILT_BY="$(whoami)@$(hostname)"
+      export GIT_BRANCH="$TRAVIS_BRANCH"
+      goreleaser --rm-dist --snapshot --debug
+    on:
+      all_branches: true
+      tags: false

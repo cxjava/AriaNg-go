@@ -1,13 +1,27 @@
+project_name: AriaNg-go
+
+env:
+  - GO111MODULE=on
+  - REPO=github.com/cxjava/AriaNg-go
+
 before:
   hooks:
+    - go mod tidy
     - go generate ./...
-project_name: AriaNg-go
+
 builds:
-- env:
+- id: default
+  binary: AriaNg-go
+  env:
     - CGO_ENABLED=0
   ldflags:
     - "-s -w"
-  binary: AriaNg-go
+    - -X "{{.Env.REPO}}/cmd.Version={{.Version}}"
+    - -X "{{.Env.REPO}}/cmd.Commit={{.FullCommit}}"
+    - -X "{{.Env.REPO}}/cmd.RepoUrl={{.GitURL}}"
+    - -X "{{.Env.REPO}}/cmd.BuildDate={{.Date}}"
+    - -X "{{.Env.REPO}}/cmd.BuiltWithGoVersion={{.Env.GO_VERSION}}"
+    - -X "{{.Env.REPO}}/cmd.BuiltBy={{.Env.BUILT_BY}}"
   flags:
     - -tags=release
   goos:
@@ -21,28 +35,36 @@ builds:
   goarm:
     - 6
     - 7
+  ignore:
+    - goos: darwin
+      goarch: 386
+    - goos: darwin
+      goarch: arm
   hooks:
     post: ./upx.sh
-archive:
-  name_template: '{{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}{{ if .Arm }}v{{ .Arm }}{{ end }}'
-  format: tar.gz
-  format_overrides:
-    - goos: windows
-      format: zip
-  wrap_in_directory: true
-  files:
-  - none*
-  replacements:
-    amd64: 64-bit
-    386: 32-bit
-    arm: ARM
-    arm64: ARM64
-    darwin: macOS
-    linux: Linux
-    windows: Windows
-    openbsd: OpenBSD
-    netbsd: NetBSD
-    freebsd: FreeBSD
+archives:
+  - id: binary
+    name_template: '{{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}{{ if .Arm }}v{{ .Arm }}{{ end }}'
+    format: tar.gz
+    format_overrides:
+      - goos: windows
+        format: zip
+    builds:
+      - default
+    wrap_in_directory: true
+    files:
+    - none*
+    replacements:
+      amd64: 64-bit
+      386: 32-bit
+      arm: ARM
+      arm64: ARM64
+      darwin: macOS
+      linux: Linux
+      windows: Windows
+      openbsd: OpenBSD
+      netbsd: NetBSD
+      freebsd: FreeBSD
 release:
   github:
     owner: cxjava
