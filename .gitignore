@@ -10,8 +10,10 @@
 
 # Output of the go coverage tool, specifically when used with LiteIDE
 *.out
-assets_release.go
+*.iml
+assets/assets_release.go
+.idea/
+.idea
 AriaNg/
 dist/
-AriaNg-1.0.0/
 AriaNg-go
