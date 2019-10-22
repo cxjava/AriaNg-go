@@ -45,7 +45,7 @@ deploy:
       export GO_VERSION="$TRAVIS_GO_VERSION"
       export BUILT_BY="$(whoami)@$(hostname)"
       export GIT_BRANCH="$TRAVIS_BRANCH"
-      goreleaser --rm-dist --snapshot --debug
+      goreleaser --snapshot --skip-publish --rm-dist --debug
     on:
       all_branches: true
       tags: false
