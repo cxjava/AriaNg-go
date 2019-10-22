@@ -37,7 +37,9 @@ deploy:
       export GIT_BRANCH="$TRAVIS_BRANCH" &&
       goreleaser release --skip-validate --skip-sign --debug
     on:
-      tags: true
+      tags: false
+      all_branches: true
+      condition: $TRAVIS_COMMIT_MESSAGE == release
 
   - provider: script
     skip_cleanup: true
@@ -49,3 +51,4 @@ deploy:
     on:
       all_branches: true
       tags: false
+      condition: $TRAVIS_COMMIT_MESSAGE == test
