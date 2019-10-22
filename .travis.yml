@@ -31,20 +31,20 @@ install:
 deploy:
   - provider: script
     skip_cleanup: true
-    script: |
-      export GO_VERSION="$TRAVIS_GO_VERSION"
-      export BUILT_BY="$(whoami)@$(hostname)"
-      export GIT_BRANCH="$TRAVIS_BRANCH"
+    script: >-
+      export GO_VERSION="$TRAVIS_GO_VERSION" &&
+      export BUILT_BY="$(whoami)@$(hostname)" &&
+      export GIT_BRANCH="$TRAVIS_BRANCH" &&
       goreleaser release --skip-validate --skip-sign --debug
     on:
       tags: true
 
   - provider: script
     skip_cleanup: true
-    script: |
-      export GO_VERSION="$TRAVIS_GO_VERSION"
-      export BUILT_BY="$(whoami)@$(hostname)"
-      export GIT_BRANCH="$TRAVIS_BRANCH"
+    script: >-
+      export GO_VERSION="$TRAVIS_GO_VERSION" &&
+      export BUILT_BY="$(whoami)@$(hostname)" &&
+      export GIT_BRANCH="$TRAVIS_BRANCH" &&
       goreleaser release --snapshot --skip-publish --rm-dist --debug
     on:
       all_branches: true
