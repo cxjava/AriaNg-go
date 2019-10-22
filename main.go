@@ -1,19 +1,11 @@
+//go:generate go run github.com/UnnoTed/fileb0x b0x.yaml
+
 package main
 
 import (
-	"flag"
-	"net/http"
+	"github.com/cxjava/AriaNg-go/cmd"
 )
-
-var (
-	address = flag.String("a", ":18080", `bind address.`)
-)
-
-func init() {
-	flag.Parse()
-}
 
 func main() {
-	http.Handle("/", http.StripPrefix("/", http.FileServer(HTTP)))
-	http.ListenAndServe(*address, nil)
+	cmd.Execute()
 }
