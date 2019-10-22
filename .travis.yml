@@ -19,10 +19,10 @@ install:
       echo "Installing upx .."
       curl -OL "https://github.com/upx/upx/releases/download/v${UPXVER}/upx-${UPXVER}-amd64_linux.tar.xz"
       tar xvf "upx-${UPXVER}-amd64_linux.tar.xz"
-      cp "upx-${UPXVER}-amd64_linux/upx" "./"
+      cp "upx-${UPXVER}-amd64_linux/upx" "$(go env GOPATH)/bin"
     fi
   - ls -al
-  - ./upx --version
+  - upx --version
   - chmod +x upx.sh
   - ls -al
   - go get -u -v github.com/UnnoTed/fileb0x
