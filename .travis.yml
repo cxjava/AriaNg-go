@@ -39,7 +39,7 @@ deploy:
     on:
       tags: false
       all_branches: true
-      condition: $TRAVIS_COMMIT_MESSAGE == release
+      condition: $TRAVIS_COMMIT_MESSAGE = *"release"*
 
   - provider: script
     skip_cleanup: true
@@ -51,4 +51,4 @@ deploy:
     on:
       all_branches: true
       tags: false
-      condition: $TRAVIS_COMMIT_MESSAGE == test
+      condition: $TRAVIS_COMMIT_MESSAGE = *"test"*
