@@ -11,7 +11,7 @@ before:
 
 builds:
 - id: default
-  binary: AriaNg-go
+  binary: {{.ProjectName}}
   env:
     - CGO_ENABLED=0
   ldflags:
@@ -68,7 +68,7 @@ archives:
 release:
   github:
     owner: cxjava
-    name: AriaNg-go
+    name: {{.ProjectName}}
   draft: true
   prerelease: auto
   name_template: "{{.ProjectName}}-v{{.Version}}-{{.ShortCommit}}-{{.Date}}"
