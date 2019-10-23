@@ -54,6 +54,6 @@ func main() {
 
 	err := app.Run(os.Args)
 	if err != nil {
-		log.Fatal("Failed to run app with %s: %v", os.Args, err)
+		log.Fatalf("Failed to run app with %s: %v", os.Args, err)
 	}
 }
