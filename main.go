@@ -3,57 +3,28 @@
 package main
 
 import (
-	"log"
+	"fmt"
 	"os"
-	"sort"
 
-	"github.com/urfave/cli"
+	"github.com/alecthomas/kingpin"
 )
 
-func init() {
-	cli.VersionPrinter = func(c *cli.Context) {
-		showVersion()
-	}
-}
-
-var address string
-
 func main() {
-	app := cli.NewApp()
-	app.Name = "AriaNg-go"
-	app.Usage = "AriaNg in go http server"
-	app.Version = Version
-	app.Flags = []cli.Flag{
-		cli.StringFlag{
-			Name:        "address, a",
-			Value:       ":18080",
-			Usage:       "bind address",
-			Destination: &address,
-		},
-	}
-	app.Commands = []cli.Command{
-		{
-			Name:    "server",
-			Aliases: []string{"s"},
-			Usage:   "Start server for AriaNg",
-			// Flags: []cli.Flag{
-			// 	cli.StringFlag{
-			// 		Name:  "path, p",
-			// 		Usage: "template path",
-			// 	},
-			// },
-			Action: func(c *cli.Context) error {
-				startServer(address)
-				return nil
-			},
-		},
-	}
+	fmt.Println()
+	defer fmt.Println()
 
-	sort.Sort(cli.FlagsByName(app.Flags))
-	sort.Sort(cli.CommandsByName(app.Commands))
+	var app = kingpin.New("AriaNg-go", "AriaNg in go http server")
+	var address = app.Flag("address", "Bind address.").Short('a').Default(":18080").String()
+	var serverCmd = app.Command("server", "Start http server for AriaNg").Alias("s")
 
-	err := app.Run(os.Args)
-	if err != nil {
-		log.Fatalf("Failed to run app with %s: %v", os.Args, err)
+	app.Version(buildVersion())
+	app.VersionFlag.Short('v')
+	app.HelpFlag.Short('h')
+
+	cmd := kingpin.MustParse(app.Parse(os.Args[1:]))
+
+	switch cmd {
+	case serverCmd.FullCommand():
+		startServer(*address)
 	}
 }
