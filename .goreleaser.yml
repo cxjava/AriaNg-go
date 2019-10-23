@@ -2,7 +2,6 @@ project_name: AriaNg-go
 
 env:
   - GO111MODULE=on
-  - REPO=github.com/cxjava/AriaNg-go
 
 before:
   hooks:
@@ -16,12 +15,12 @@ builds:
     - CGO_ENABLED=0
   ldflags:
     - "-s -w"
-    - -X "{{.Env.REPO}}/cmd.Version={{.Version}}"
-    - -X "{{.Env.REPO}}/cmd.Commit={{.FullCommit}}"
-    - -X "{{.Env.REPO}}/cmd.RepoUrl={{.GitURL}}"
-    - -X "{{.Env.REPO}}/cmd.BuildDate={{.Date}}"
-    - -X "{{.Env.REPO}}/cmd.BuiltWithGoVersion={{.Env.GO_VERSION}}"
-    - -X "{{.Env.REPO}}/cmd.BuiltBy={{.Env.BUILT_BY}}"
+    - -X "main.Version={{.Version}}"
+    - -X "main.Commit={{.FullCommit}}"
+    - -X "main.RepoUrl={{.GitURL}}"
+    - -X "main.BuildDate={{.Date}}"
+    - -X "main.BuiltWithGoVersion={{.Env.GO_VERSION}}"
+    - -X "main.BuiltBy={{.Env.BUILT_BY}}"
   flags:
     - -tags=release
   goos:
