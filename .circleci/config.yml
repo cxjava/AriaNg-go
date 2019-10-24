@@ -19,14 +19,6 @@ jobs:
           command: wget https://github.com/goreleaser/goreleaser/releases/download/v${GORELEASER_VERSION}/goreleaser_amd64.deb && sudo dpkg -i goreleaser_amd64.deb
 
       - run:
-          name: Make Composer executables available globally
-          environment:
-            BASH_ENV: /home/circleci/.bashrc
-          command: |
-            echo 'export PATH=/home/circleci/project/:$PATH' >> $BASH_ENV
-            source /home/circleci/.bashrc
-
-      - run:
           name: install AriaNg
           command: wget https://github.com/mayswind/AriaNg/releases/download/${ARIANG_VERSION}/AriaNg-${ARIANG_VERSION}.zip && unzip -q AriaNg-${ARIANG_VERSION}.zip -d AriaNg
 
@@ -39,6 +31,8 @@ jobs:
 
       - run:
           name: installing upx
+          environment:
+            BASH_ENV: /home/circleci/.bashrc
           command: |
             echo "Installing upx .."
             echo $(go env GOPATH)
@@ -47,6 +41,9 @@ jobs:
             ls -al
             pwd
             cp "upx-${UPXVER}-amd64_linux/upx" /home/circleci/project/
+            echo 'export PATH=/home/circleci/project:$PATH' >> $BASH_ENV
+            source /home/circleci/.bashrc
+            cat /home/circleci/.bashrc
             ls -al
             upx --version
             chmod +x upx.sh
