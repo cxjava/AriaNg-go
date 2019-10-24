@@ -3,22 +3,23 @@ jobs:
   build:
     docker:
       - image: circleci/golang:1.13
+        environment:
+          GO111MODULE: on
+          GORELEASER_VERSION: 0.120.2
+          ARIANG_VERSION: 1.1.4
+          UPXVER: 3.94
     parallelism: 1
-    environment:
-      GO111MODULE: on
-      GORELEASER_VERSION: 0.120.2
-      ARIANG_VERSION: 1.1.4
-      UPXVER: 3.94
     steps:
       - checkout
       - restore_cache:
           keys:
             - go-mod-v4-{{ checksum "go.sum" }}
       - run:
-          name: Pre install!
+          name: install AriaNg
+          command: wget https://github.com/mayswind/AriaNg/releases/download/${ARIANG_VERSION}/AriaNg-${ARIANG_VERSION}.zip && unzip -q AriaNg-${ARIANG_VERSION}.zip -d AriaNg
+      - run:
+          name: installing upx
           command: |
-            curl -sfL https://install.goreleaser.com/github.com/goreleaser/goreleaser.sh | sh -s -- -b $(go env GOPATH)/bin v${GORELEASER_VERSION}
-            wget https://github.com/mayswind/AriaNg/releases/download/${ARIANG_VERSION}/AriaNg-${ARIANG_VERSION}.zip && unzip -q AriaNg-${ARIANG_VERSION}.zip -d AriaNg
             echo "Installing upx .."
             curl -OL "https://github.com/upx/upx/releases/download/v${UPXVER}/upx-${UPXVER}-amd64_linux.tar.xz"
             tar xvf "upx-${UPXVER}-amd64_linux.tar.xz"
@@ -27,9 +28,14 @@ jobs:
             upx --version
             chmod +x upx.sh
             ls -al
+      - run:
+          name: install fileb0x
+          command: |
             go get -u -v github.com/UnnoTed/fileb0x
             go install github.com/UnnoTed/fileb0x
-
+      - run:
+          name: install goreleaser
+          command: curl -sL https://git.io/goreleaser | bash
       - run:
           name: Run build
           command: |
