@@ -21,6 +21,7 @@ jobs:
       - run:
           name: install fileb0x
           command: |
+            export GO111MODULE=true
             go get -u -v github.com/UnnoTed/fileb0x
             go install github.com/UnnoTed/fileb0x
       - run:
