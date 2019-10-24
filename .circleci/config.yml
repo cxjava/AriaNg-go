@@ -16,7 +16,7 @@ jobs:
             - go-mod-v4-{{ checksum "go.sum" }}
       - run:
           name: install goreleaser
-          command: curl -sL https://git.io/goreleaser | bash
+          command: wget https://github.com/goreleaser/goreleaser/releases/download/v${GORELEASER_VERSION}/goreleaser_amd64.deb && sudo dpkg -i goreleaser_amd64.deb
 
       - run:
           name: Make Composer executables available globally
