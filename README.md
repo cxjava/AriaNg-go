@@ -2,8 +2,9 @@
   <a href="https://travis-ci.org/cxjava/AriaNg-go">
     <img src="https://travis-ci.org/cxjava/AriaNg-go.svg?branch=master" alt="Build Status">
   </a>
+  
+  [![CircleCI](https://circleci.com/gh/cxjava/AriaNg-go.svg?style=svg)](https://circleci.com/gh/cxjava/AriaNg-go)
 </div>
-[![CircleCI](https://circleci.com/gh/cxjava/AriaNg-go.svg?style=svg)](https://circleci.com/gh/cxjava/AriaNg-go)
 
 # AriaNg-go
 AriaNg in go http server
