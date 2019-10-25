@@ -8,8 +8,6 @@ jobs:
           - GORELEASER_VERSION=0.120.2
           - ARIANG_VERSION=1.1.4
           - UPXVER=3.94
-          - GO_VERSION=$(go version)
-          - BUILT_BY=$(whoami)@$(hostname)
     parallelism: 1
     steps:
       - checkout
@@ -48,7 +46,8 @@ jobs:
       - run:
           name: Run build
           command: |
-
+            export GO_VERSION="$(go version)"
+            export BUILT_BY="$(whoami)@$(hostname)"
             goreleaser release --skip-validate --skip-sign --debug
 
       - run: cat go.sum
