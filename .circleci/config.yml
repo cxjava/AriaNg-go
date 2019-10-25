@@ -25,6 +25,7 @@ jobs:
       - run:
           name: install fileb0x
           command: |
+            ls -al
             go get -u -v github.com/UnnoTed/fileb0x
             go install github.com/UnnoTed/fileb0x
 
@@ -48,6 +49,7 @@ jobs:
             export GO_VERSION="$(go version)"
             export BUILT_BY="$(whoami)@$(hostname)"
             goreleaser release --skip-validate --skip-sign --debug
+            ls -al
 
       - save_cache:
           key: go-mod-v4-{{ checksum "go.sum" }}
