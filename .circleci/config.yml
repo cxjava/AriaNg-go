@@ -51,6 +51,8 @@ jobs:
             goreleaser release --skip-validate --skip-sign --debug
 
       - run: cat go.sum
+      - run: go mod tidy
+      - run: cat go.sum
       - save_cache:
           key: go-mod-v4-{{ checksum "go.sum" }}
           paths:
