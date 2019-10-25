@@ -4,10 +4,10 @@ jobs:
     docker:
       - image: circleci/golang:1.13
         environment:
-          - GO111MODULE="on"
-          - GORELEASER_VERSION="0.120.2"
-          - ARIANG_VERSION="1.1.4"
-          - UPXVER="3.94"
+          - GO111MODULE=on
+          - GORELEASER_VERSION=0.120.2
+          - ARIANG_VERSION=1.1.4
+          - UPXVER=3.94
     parallelism: 1
     steps:
       - checkout
@@ -48,7 +48,7 @@ jobs:
           command: |
             export GO_VERSION="$(go version)"
             export BUILT_BY="$(whoami)@$(hostname)"
-            curl -sL https://git.io/goreleaser | bash -s -- release --skip-validate --skip-sign --debug
+            goreleaser release --skip-validate --skip-sign --debug
 
       - save_cache:
           key: go-mod-v4-{{ checksum "go.sum" }}
