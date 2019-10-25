@@ -8,8 +8,8 @@ jobs:
           - GORELEASER_VERSION=0.120.2
           - ARIANG_VERSION=1.1.4
           - UPXVER=3.94
-          - GO_VERSION="$(go version)"
-          - BUILT_BY="$(whoami)@$(hostname)"
+          - GO_VERSION=$(go version)
+          - BUILT_BY=$(whoami)@$(hostname)
     parallelism: 1
     steps:
       - checkout
