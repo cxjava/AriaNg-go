@@ -35,7 +35,9 @@ jobs:
             BASH_ENV: /home/circleci/.bashrc
           command: |
             echo "Installing upx .."
+            export GO111MODULE=on
             echo $(go env GOPATH)
+            cp /home/circleci/project/README.md $(go env GOPATH)
             curl -OL "https://github.com/upx/upx/releases/download/v${UPXVER}/upx-${UPXVER}-amd64_linux.tar.xz"
             tar xvf "upx-${UPXVER}-amd64_linux.tar.xz"
             ls -al
