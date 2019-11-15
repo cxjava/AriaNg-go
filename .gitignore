@@ -15,3 +15,5 @@
 dist/
 AriaNg/
 AriaNg-go
+/main-packr.go
+/packrd/
