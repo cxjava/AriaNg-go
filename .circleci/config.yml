@@ -24,10 +24,10 @@ jobs:
           command: wget https://github.com/mayswind/AriaNg/releases/download/${ARIANG_VERSION}/AriaNg-${ARIANG_VERSION}.zip && unzip -q AriaNg-${ARIANG_VERSION}.zip -d AriaNg
 
       - run:
-          name: install fileb0x
+          name: install packr2
           command: |
-            go get -u -v github.com/UnnoTed/fileb0x
-            go install github.com/UnnoTed/fileb0x
+            go get -u -v github.com/gobuffalo/packr/v2/packr2
+            go install github.com/gobuffalo/packr/v2/packr2
 
       - run:
           name: installing upx

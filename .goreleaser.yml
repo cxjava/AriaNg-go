@@ -8,38 +8,38 @@ before:
     - go generate ./...
 
 builds:
-- id: default
-  binary: AriaNg-go
-  env:
-    - CGO_ENABLED=0
-  ldflags:
-    - "-s -w"
-    - -X "main.Version={{.Version}}"
-    - -X "main.Commit={{.FullCommit}}"
-    - -X "main.RepoUrl={{.GitURL}}"
-    - -X "main.BuildDate={{.Date}}"
-    - -X "main.BuiltWithGoVersion={{.Env.GO_VERSION}}"
-    - -X "main.BuiltBy={{.Env.BUILT_BY}}"
-  flags:
-    - -tags=release
-  goos:
-    - windows
-    - darwin
-    - linux
-  goarch:
-    - 386
-    - amd64
-    - arm
-  goarm:
-    - 6
-    - 7
-  ignore:
-    - goos: darwin
-      goarch: 386
-    - goos: darwin
-      goarch: arm
-  hooks:
-    post: ./upx.sh
+  - id: default
+    binary: "{{.ProjectName}}"
+    env:
+      - CGO_ENABLED=0
+    ldflags:
+      - -s -w
+      - -X "main.Version={{.Version}}"
+      - -X "main.Commit={{.FullCommit}}"
+      - -X "main.RepoUrl={{.GitURL}}"
+      - -X "main.BuildDate={{.Date}}"
+      - -X "main.BuiltWithGoVersion={{.Env.GO_VERSION}}"
+      - -X "main.BuiltBy={{.Env.BUILT_BY}}"
+    flags:
+      - -tags=release
+    goos:
+      - windows
+      - darwin
+      - linux
+    goarch:
+      - 386
+      - amd64
+      - arm
+    goarm:
+      - 6
+      - 7
+    ignore:
+      - goos: darwin
+        goarch: 386
+      - goos: darwin
+        goarch: arm
+    hooks:
+      post: ./upx.sh {{.ProjectName}}
 archives:
   - id: binary
     name_template: '{{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}{{ if .Arm }}v{{ .Arm }}{{ end }}'
@@ -51,7 +51,7 @@ archives:
       - default
     wrap_in_directory: true
     files:
-    - none*
+      - none*
     replacements:
       amd64: 64-bit
       386: 32-bit

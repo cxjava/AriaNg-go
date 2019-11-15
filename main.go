@@ -1,4 +1,4 @@
-//go:generate go run github.com/UnnoTed/fileb0x b0x.yaml
+//go:generate packr2
 
 package main
 
