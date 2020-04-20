@@ -16,7 +16,7 @@ builds:
       - -X "{{.Env.REPO}}/cmd.Commit={{.FullCommit}}"
       - -X "{{.Env.REPO}}/cmd.RepoUrl={{.GitURL}}"
       - -X "{{.Env.REPO}}/cmd.BuildDate={{.Date}}"
-      - -X "{{.Env.REPO}}/cmd.BuiltWithGoVersion={{.Env.GO_VERSION}}"
+      - -X "{{.Env.REPO}}/cmd.BuiltWithGoVersion={{.Env.GOLANG_VERSION}}"
       - -X "{{.Env.REPO}}/cmd.BuiltBy={{.Env.BUILT_BY}}"
     flags:
       - -tags=release
