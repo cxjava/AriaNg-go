@@ -58,6 +58,11 @@ jobs:
           printf "\n\nSystem environment:\n\n"
           env
           
+      - name: Set environment variables
+        run: |
+          echo ::set-env name=GOLANG_VERSION::$(go version)
+          echo ::set-env name=BUILT_BY::$(whoami)@$(hostname)
+          
       # GoReleaser will take care of publishing those artifacts into the release
       - name: Run GoReleaser
         uses: goreleaser/goreleaser-action@v1
@@ -66,3 +71,5 @@ jobs:
           args: release --rm-dist --skip-validate --skip-sign --debug --config .github/goreleaser.yml
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GOLANG_VERSION: ${{ env.GOLANG_VERSION }}
+          BUILT_BY: ${{ env.BUILT_BY }}
