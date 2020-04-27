@@ -23,6 +23,7 @@ builds:
       - windows
       - darwin
       - linux
+      - freebsd
     goarch:
       - amd64
       - arm
@@ -33,6 +34,8 @@ builds:
     ignore:
       - goos: darwin
         goarch: arm
+      - goos: freebsd
+        goarch: arm64
 archives:
   - format: gz
     files:
