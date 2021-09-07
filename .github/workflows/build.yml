@@ -60,8 +60,8 @@ jobs:
           
       - name: Set environment variables
         run: |
-          echo ::set-env name=GOLANG_VERSION::$(go version)
-          echo ::set-env name=BUILT_BY::$(whoami)@$(hostname)
+          echo "GOLANG_VERSION=$(go version)" >> $GITHUB_ENV
+          echo "BUILT_BY=$(whoami)@$(hostname)" >> $GITHUB_ENV
           
       # GoReleaser will take care of publishing those artifacts into the release
       - name: Run GoReleaser
