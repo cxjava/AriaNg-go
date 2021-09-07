@@ -45,3 +45,10 @@ archives:
     format_overrides:
       - goos: windows
         format: zip
+release:
+  github:
+    owner: cxjava
+    name: AriaNg-go
+  draft: true
+  prerelease: auto
+  name_template: "{{.ProjectName}}-v{{.Version}}-{{.ShortCommit}}-{{.Date}}"
