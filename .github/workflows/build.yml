@@ -6,6 +6,12 @@ on:
       - "v*"
   watch:
     types: started
+  workflow_dispatch:
+    inputs:
+      ariang_version:
+        description: 'AriaNg version'
+        required: true
+        default: '1.2.2'
 
 jobs:
   release:
@@ -32,7 +38,7 @@ jobs:
         
       - name: Get AriaNg
         env:
-          ARIANG_VERSION: 1.1.5
+            ARIANG_VERSION: ${{ github.event.inputs.ariang_version }}
         run: wget https://github.com/mayswind/AriaNg/releases/download/${ARIANG_VERSION}/AriaNg-${ARIANG_VERSION}.zip && unzip -q AriaNg-${ARIANG_VERSION}.zip -d AriaNg
         
       - name: Check git tag exist
